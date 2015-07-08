@@ -1,0 +1,22 @@
+javac -classpath ${HADOOP_HOME}/hadoop-core.jar:${HADOOP_HOME}/hadoop-mapred.jar:${HADOOP_HOME}/hadoop-core-0.22.0-dev.jar -d  invertedindex_classes InvertedIndex.java
+jar -cvf invertedindex.jar -C invertedindex_classes/ .
+
+hadoop fs -copyFromLocal data/gutenberg-txt /project/input
+
+hadoop jar invertedindex.jar edu.cmu.InvertedIndex /project/input /project/output
+
+
+hadoop fs -get /project/output output  
+
+
+hadoop fs -copyFromLocal gutenberg-txt/* /project/input
+
+
+
+	
+s3://cmu-sidil-bucket/project4/project4.1/Stopwords.zip
+s3://cmu-sidil-bucket/project4/project4.1/SidiLin.zip
+
+
+
+
